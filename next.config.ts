@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
+// This app is almost entirely per-user and auth-driven, so we use the
+// classic dynamic rendering model rather than Cache Components.
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {
