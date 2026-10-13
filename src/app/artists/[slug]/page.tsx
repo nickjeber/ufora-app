@@ -77,7 +77,7 @@ export default async function ArtistPage({ params }: PageProps<"/artists/[slug]"
         >
           <div className="h-full bg-gradient-to-t from-plum/80 via-plum/10 to-transparent" />
         </div>
-        <div className="mx-auto -mt-20 flex max-w-5xl flex-col items-start gap-5 px-4 sm:-mt-24 sm:flex-row sm:items-end sm:px-6">
+        <div className="mx-auto -mt-20 flex max-w-5xl flex-col items-start gap-5 px-4 sm:-mt-16 sm:flex-row sm:items-end sm:px-6">
           <div className="relative size-36 shrink-0 overflow-hidden rounded-full border-4 border-background bg-yellow sm:size-44">
             {avatar ? (
               <img src={avatar} alt={profile.artist_name} className="size-full object-cover" />

@@ -88,7 +88,7 @@ export function ImageUpload({
       {hasImage && onRemove && (
         <button
           type="button"
-          className="text-xs text-muted underline-offset-4 hover:underline"
+          className="rounded-full bg-surface/90 px-3 py-1.5 text-xs text-muted ring-1 ring-line hover:text-plum"
           disabled={working}
           onClick={() =>
             start(async () => {

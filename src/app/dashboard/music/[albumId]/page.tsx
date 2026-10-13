@@ -30,7 +30,7 @@ export default async function AlbumPage({ params }: PageProps<"/dashboard/music/
 
   return (
     <div className="space-y-8">
-      <Link href="/dashboard/music" className="text-sm text-muted underline-offset-4 hover:underline">
+      <Link href="/dashboard/music" className="inline-block text-sm text-muted underline-offset-4 hover:underline">
         ← All releases
       </Link>
 
