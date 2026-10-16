@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- user uploads are served straight from Supabase Storage */
 import { ActionForm } from "@/components/action-form";
 import { ImageUpload } from "@/components/file-upload";
-import { requireArtist } from "@/lib/auth";
+import { requireArtist, siteOrigin } from "@/lib/auth";
 import { fileUrl } from "@/lib/format";
 import { setProfileImage, updateProfile } from "./profile-actions";
 
@@ -10,7 +10,7 @@ export default async function ProfilePage({ searchParams }: PageProps<"/dashboar
   const { welcome, password } = await searchParams;
   const avatar = fileUrl("avatars", profile.avatar_path);
   const background = fileUrl("backgrounds", profile.background_path);
-  const host = (process.env.NEXT_PUBLIC_SITE_URL ?? "").replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const host = (await siteOrigin()).replace(/^https?:\/\//, "");
 
   return (
     <div className="space-y-8">
@@ -45,7 +45,7 @@ export default async function ProfilePage({ searchParams }: PageProps<"/dashboar
           </div>
         </div>
         <div className="flex flex-wrap items-end gap-4 px-6 pb-5">
-          <div className="-mt-12 size-24 shrink-0 overflow-hidden rounded-full border-4 border-surface bg-yellow">
+          <div className="relative z-10 -mt-12 size-24 shrink-0 overflow-hidden rounded-full border-4 border-surface bg-yellow">
             {avatar ? (
               <img src={avatar} alt="" className="size-full object-cover" />
             ) : (
