@@ -104,11 +104,11 @@ export default function Home() {
       {/* For artists */}
       <section id="artists" className="scroll-mt-4">
         <div className="mx-auto max-w-6xl px-4 py-24 sm:px-8 lg:py-32">
-          <div className="grid items-end gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+          <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-center lg:gap-16 lg:text-left">
             <p aria-hidden className="font-display text-[clamp(7rem,22vw,15rem)] leading-[0.8] font-semibold">
               5%
             </p>
-            <div className="max-w-[34rem] pb-2">
+            <div className="max-w-[34rem]">
               <h2 className="font-display text-[clamp(2.2rem,5vw,3.5rem)] leading-[0.95] font-semibold">
                 You keep everything else.
               </h2>
