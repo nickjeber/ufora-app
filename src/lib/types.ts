@@ -6,6 +6,7 @@ export type Profile = {
   location: string | null;
   avatar_path: string | null;
   background_path: string | null;
+  is_signed: boolean;
   created_at: string;
   updated_at: string;
 };

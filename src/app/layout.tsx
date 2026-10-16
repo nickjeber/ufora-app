@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "Ufora", template: "%s · Ufora" },
-  description: "Ufora artist platform — your music, videos, tour and press in one place.",
+  description: "Ufora is a record label for uncompromised music. Humans make the art; AI runs the business.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
 };
 
