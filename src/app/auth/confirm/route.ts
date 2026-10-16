@@ -27,7 +27,11 @@ export async function GET(request: NextRequest) {
   }
 
   if (failed) {
-    return NextResponse.redirect(new URL("/login?error=link", request.url));
+    // A signup link opened in a different browser than the one used to sign up
+    // can't finish signing in, but Supabase has already verified the email by
+    // this point, so send them to sign in rather than showing an error.
+    const fallback = code && !type ? "/login?verified=1" : "/login?error=link";
+    return NextResponse.redirect(new URL(fallback, request.url));
   }
 
   const dest = new URL(next, request.url);

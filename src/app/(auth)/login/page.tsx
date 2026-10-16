@@ -10,7 +10,7 @@ const ERRORS: Record<string, string> = {
 };
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
-  const { next, error } = await searchParams;
+  const { next, error, verified } = await searchParams;
   const errorText = typeof error === "string" ? ERRORS[error] : undefined;
 
   return (
@@ -18,6 +18,9 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
       <h1 className="heading text-2xl">Sign in</h1>
       <p className="mt-1 mb-6 text-sm text-muted">Manage your artist page.</p>
       {errorText && <p className="mb-4 rounded-md bg-yellow/40 px-3 py-2 text-sm">{errorText}</p>}
+      {verified && !errorText && (
+        <p className="mb-4 rounded-md bg-yellow px-3 py-2 text-sm">Your email is verified. Sign in to set up your page.</p>
+      )}
       <ActionForm action={login} submitLabel="Sign in" pendingLabel="Signing in…" buttonClassName="btn-primary w-full">
         <input type="hidden" name="next" value={typeof next === "string" ? next : ""} />
         <div>
