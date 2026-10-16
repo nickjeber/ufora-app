@@ -7,7 +7,8 @@ import { DashboardNav } from "./nav";
 export const metadata = { title: "Dashboard" };
 
 export default async function DashboardLayout({ children }: LayoutProps<"/dashboard">) {
-  const { profile } = await requireArtist();
+  const { profile, supabase } = await requireArtist();
+  const { data: isAdmin } = await supabase.rpc("is_admin");
 
   return (
     <div className="flex flex-1 flex-col">
@@ -24,6 +25,11 @@ export default async function DashboardLayout({ children }: LayoutProps<"/dashbo
               View public page ↗
             </Link>
           </div>
+          {isAdmin && (
+            <Link href="/admin" className="btn-dark px-4 py-1.5 text-xs">
+              Review submissions
+            </Link>
+          )}
           <form action={signOut}>
             <button className="btn-ghost px-4 py-1.5 text-xs">Sign out</button>
           </form>

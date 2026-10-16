@@ -1,6 +1,6 @@
 import "server-only";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { createClient } from "./supabase/server";
 import type { IndustryProfile, Profile } from "./types";
 
@@ -61,4 +61,16 @@ export async function siteOrigin() {
 /** Only allow same-site relative redirects. */
 export function safeNext(value: unknown, fallback = "/dashboard") {
   return typeof value === "string" && value.startsWith("/") && !value.startsWith("//") ? value : fallback;
+}
+
+/** For admin pages: returns the signed-in admin, or shows a 404 to everyone else. */
+export async function requireAdmin() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login?next=/admin");
+  const { data: isAdmin } = await supabase.rpc("is_admin");
+  if (!isAdmin) notFound();
+  return { supabase, user };
 }

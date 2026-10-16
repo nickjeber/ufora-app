@@ -17,7 +17,7 @@ export default function SubmitPage() {
         <div>
           <h1 className="font-display text-[clamp(3rem,7vw,5.5rem)] leading-[0.9] font-semibold">Send us your music</h1>
           <p className="mt-6 max-w-[30rem] text-lg leading-relaxed">
-            We’re looking for artists making work that sounds like no one else. Send links to whatever you’ve made.
+            We’re looking for artists making work that sounds like no one else. Send an album, EP, single or demo.
             Every submission gets a listen from a person.
           </p>
           <dl className="mt-10 max-w-[30rem] space-y-5 border-t-2 border-plum pt-8">
@@ -32,7 +32,8 @@ export default function SubmitPage() {
             <div>
               <dt className="font-display text-xl font-semibold">What happens next</dt>
               <dd className="mt-1 leading-relaxed">
-                If it’s a fit, we’ll email you about signing. We can’t reply to everyone, but we listen to everything.
+                We listen to every release and email you either way. If it’s a fit, you’ll get an invite to set up your
+                page. If not this time, send us your next album, EP, single or demo. Every release gets a fresh listen.
               </dd>
             </div>
           </dl>
@@ -47,7 +48,7 @@ export default function SubmitPage() {
               <>
                 <p className="font-display text-4xl leading-none font-semibold">Got it. Thank you.</p>
                 <p className="mt-4 text-lg leading-relaxed">
-                  Your music is in the queue for a listen. If it’s a fit, we’ll be in touch by email.
+                  Your music is in the queue for a listen. We’ll email you either way once we’ve heard it.
                 </p>
                 <Link href="/artists" className="site-btn mt-6">
                   Browse the roster
@@ -61,6 +62,22 @@ export default function SubmitPage() {
               </Field>
               <Field label="Email" htmlFor="email">
                 <input id="email" name="email" type="email" required autoComplete="email" className={siteInput} />
+              </Field>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-[auto_1fr]">
+              <Field label="What you’re sending" htmlFor="release_type">
+                <select id="release_type" name="release_type" required defaultValue="" className={siteInput}>
+                  <option value="" disabled>
+                    Choose one
+                  </option>
+                  <option value="album">Album</option>
+                  <option value="ep">EP</option>
+                  <option value="single">Single</option>
+                  <option value="demo">Demo</option>
+                </select>
+              </Field>
+              <Field label="Title (optional)" htmlFor="release_title">
+                <input id="release_title" name="release_title" maxLength={200} className={siteInput} />
               </Field>
             </div>
             <Field label="Where you’re based" htmlFor="location">

@@ -33,15 +33,21 @@ const OURS = [
 ];
 
 const STEPS = [
-  { title: "Send us your music", body: "Links to whatever you’ve made. It doesn’t need to be polished for anyone else’s ears." },
+  {
+    title: "Send us a release",
+    body: "An album, EP, single or demo. It doesn’t need to be polished for anyone else’s ears.",
+  },
   {
     title: "We listen",
-    body: "Our scouting tools look for work that’s genuinely its own. Then a person listens. Every signing is a human decision.",
+    body: "Our scouting tools look for work that’s genuinely its own, then a person listens. We email you either way, and every new release gets a fresh listen.",
   },
-  { title: "You sign", body: "A short agreement in plain language. Free to join, and either side can end it at any time." },
+  {
+    title: "You’re invited",
+    body: "If we sign you, you get an invite to set up your page and a short agreement in plain language. Free, and either side can end it at any time.",
+  },
   {
     title: "We go to work",
-    body: "You get a page for your music, videos, tour dates and press, and we start putting you in front of the people who book and license.",
+    body: "Your page goes live with your music, videos, tour dates and press, and we start putting you in front of the people who book and license.",
   },
 ];
 

@@ -19,6 +19,7 @@ export async function signup(_prev: ActionState, formData: FormData): Promise<Ac
       artist_name: z.string().trim().min(1, "Enter your artist or band name.").max(120),
       email,
       password,
+      invite_token: z.string().uuid("Artist accounts need an invite link from Ufora."),
     })
     .safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { error: firstError(parsed.error) };
@@ -30,10 +31,18 @@ export async function signup(_prev: ActionState, formData: FormData): Promise<Ac
     password: parsed.data.password,
     options: {
       emailRedirectTo: `${origin}/auth/confirm?next=/dashboard`,
-      data: { artist_name: parsed.data.artist_name },
+      data: { artist_name: parsed.data.artist_name, invite_token: parsed.data.invite_token },
     },
   });
-  if (error) return { error: error.message };
+  if (error) {
+    // The database refuses artist accounts without a matching, unused invite.
+    if (/database error/i.test(error.message)) {
+      return {
+        error: "This invite doesn’t match that email, or it’s already been used. Use the email address we wrote to.",
+      };
+    }
+    return { error: error.message };
+  }
 
   redirect(`/check-email?email=${encodeURIComponent(parsed.data.email)}`);
 }

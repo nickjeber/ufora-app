@@ -16,6 +16,8 @@ const submissionSchema = z.object({
   artist_name: z.string().trim().min(1, "Enter your artist or band name.").max(120),
   email: z.string().trim().toLowerCase().email("Enter a valid email address."),
   location: optional(120),
+  release_type: z.enum(["album", "ep", "single", "demo"], { message: "Choose what you’re sending." }),
+  release_title: optional(200),
   links: z
     .string()
     .trim()
@@ -33,6 +35,8 @@ export async function submitMusic(_prev: ActionState, formData: FormData): Promi
     artist_name: formData.get("artist_name") ?? "",
     email: formData.get("email") ?? "",
     location: formData.get("location") ?? "",
+    release_type: formData.get("release_type") ?? "",
+    release_title: formData.get("release_title") ?? "",
     links: formData.get("links") ?? "",
     about: formData.get("about") ?? "",
   });
