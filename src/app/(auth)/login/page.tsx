@@ -16,7 +16,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   return (
     <div className="card">
       <h1 className="heading text-2xl">Sign in</h1>
-      <p className="mt-1 mb-6 text-sm text-muted">Manage your artist page.</p>
+      <p className="mt-1 mb-6 text-sm text-muted">For Ufora artists and industry members.</p>
       {errorText && <p className="mb-4 rounded-md bg-yellow/40 px-3 py-2 text-sm">{errorText}</p>}
       {verified && !errorText && (
         <p className="mb-4 rounded-md bg-yellow px-3 py-2 text-sm">Your email is verified. Sign in to set up your page.</p>

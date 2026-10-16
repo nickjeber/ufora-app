@@ -11,15 +11,22 @@ export async function SiteHeader() {
     <header className="relative z-20">
       <div className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-5 sm:px-8">
         <Logo size={52} />
-        <nav aria-label="Main" className="ml-auto flex items-center gap-5 text-[15px] sm:gap-7">
+        <nav aria-label="Main" className="ml-auto flex items-center gap-4 text-[15px] sm:gap-7">
           <Link href="/artists" className="site-link">
             Roster
           </Link>
           <Link href="/industry" className="site-link hidden sm:inline">
             For industry
           </Link>
-          <Link href={signedIn ? "/dashboard" : "/login"} className="site-link hidden sm:inline">
-            {signedIn ? "Your dashboard" : "Artist sign in"}
+          <Link href={signedIn ? "/dashboard" : "/login"} className="site-link">
+            {signedIn ? (
+              <>
+                <span className="sm:hidden">Dashboard</span>
+                <span className="hidden sm:inline">Your dashboard</span>
+              </>
+            ) : (
+              "Sign in"
+            )}
           </Link>
           <Link href="/submit" className="site-btn">
             Submit music

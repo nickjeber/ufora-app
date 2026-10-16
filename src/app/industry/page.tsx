@@ -37,12 +37,6 @@ export default function IndustryPage() {
               Pick dates and book an artist for a tour, show, session or appearance
             </li>
           </ul>
-          <p className="mt-8 text-[15px] text-muted">
-            Already have an account?{" "}
-            <Link href="/login?next=/industry/dashboard" className="font-medium text-plum underline underline-offset-4">
-              Sign in
-            </Link>
-          </p>
         </div>
 
         <div className="lg:pt-4">
@@ -90,6 +84,12 @@ export default function IndustryPage() {
               </Field>
             </div>
           </SiteForm>
+          <p className="mt-6 text-[15px] text-muted">
+            Already have an account?{" "}
+            <Link href="/login?next=/industry/dashboard" className="font-medium text-plum underline underline-offset-4">
+              Sign in
+            </Link>
+          </p>
         </div>
       </main>
       <SiteFooter />

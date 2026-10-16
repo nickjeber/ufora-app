@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { Logo } from "@/components/logo";
+import { SiteHeader } from "@/components/site/site-header";
 import { PRESS_KIND_LABEL, RELEASE_TYPE_LABEL, fileUrl, formatDate, todayIso } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import type { AlbumWithTracks, PressDate, Profile, TourDate, Video } from "@/lib/types";
@@ -69,6 +70,9 @@ export default async function ArtistPage({ params }: PageProps<"/artists/[slug]"
 
   return (
     <div className="flex-1 bg-background">
+      <div className="bg-white">
+        <SiteHeader />
+      </div>
       {/* Hero */}
       <header className="relative">
         <div
