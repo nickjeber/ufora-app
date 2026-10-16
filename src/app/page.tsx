@@ -4,7 +4,7 @@ import { SiteFooter, SiteHeader } from "@/components/site/site-header";
 import { StruckNotes } from "@/components/site/struck-notes";
 
 export const metadata: Metadata = {
-  title: { absolute: "Ufora — We replaced the executives. Not the artists." },
+  title: { absolute: "Ufora — A record label that replaced the executives with machines, not the artists." },
   description:
     "Ufora is a record label for uncompromised music. Artists keep their masters, name and sound; AI handles licensing, booking, contracts and payments for a flat 5%.",
 };
@@ -67,8 +67,8 @@ export default function Home() {
         />
         <SiteHeader />
         <div className="mx-auto max-w-6xl px-4 pt-[22vw] pb-24 sm:px-8 sm:pt-20 sm:pb-32 lg:pt-28">
-          <h1 className="max-w-[11ch] font-display text-[clamp(3.6rem,14.5vw,8.75rem)] leading-[0.9] font-semibold tracking-[-0.01em]">
-            We replaced the executives. Not the artists.
+          <h1 className="font-display text-[clamp(3rem,7.8vw,7rem)] leading-[0.92] font-semibold tracking-[-0.01em] text-balance">
+            A record label that replaced the executives with machines, not the artists.
           </h1>
           <p className="mt-8 max-w-[36rem] text-lg leading-relaxed sm:text-xl">
             Ufora is a record label for uncompromised music. Artists keep their masters, their name and their sound. AI
