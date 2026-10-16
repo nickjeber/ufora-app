@@ -226,3 +226,14 @@ create policy "Artists delete own files" on storage.objects for delete to authen
   bucket_id in ('avatars', 'backgrounds', 'album-art', 'audio')
   and (storage.foldername(name))[1] = (select auth.uid())::text
 );
+
+-- ─────────────────────────────────────────────────────────────
+-- API access (RLS above still decides which rows each user sees)
+-- ─────────────────────────────────────────────────────────────
+
+grant usage on schema public to anon, authenticated;
+grant select on public.profiles, public.albums, public.tracks, public.videos,
+  public.tour_dates, public.press_dates to anon, authenticated;
+grant update on public.profiles to authenticated;
+grant insert, update, delete on public.albums, public.tracks, public.videos,
+  public.tour_dates, public.press_dates to authenticated;
