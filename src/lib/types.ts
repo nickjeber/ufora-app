@@ -78,3 +78,53 @@ export type PressDate = {
 export type ActionState = { ok?: boolean; error?: string; message?: string };
 
 export type Bucket = "avatars" | "backgrounds" | "album-art" | "audio";
+
+export type IndustryRole =
+  | "music_supervisor"
+  | "sound_designer"
+  | "venue"
+  | "promoter"
+  | "booking_agent"
+  | "radio"
+  | "podcast"
+  | "press"
+  | "other";
+
+export type IndustryProfile = {
+  id: string;
+  name: string;
+  title: string | null;
+  organization: string | null;
+  role: IndustryRole;
+  avatar_path: string | null;
+};
+
+export type LicenseRequest = {
+  id: string;
+  created_at: string;
+  artist_id: string;
+  track_id: string | null;
+  track_title: string;
+  usage: string;
+  project_title: string;
+  description: string | null;
+  territory: string;
+  term: string;
+  budget: string | null;
+  needed_by: string | null;
+  status: "requested" | "quoted" | "licensed" | "declined" | "withdrawn";
+};
+
+export type BookingRequest = {
+  id: string;
+  created_at: string;
+  artist_id: string;
+  kind: string;
+  start_date: string;
+  end_date: string;
+  venue: string | null;
+  city: string | null;
+  details: string | null;
+  budget: string | null;
+  status: "requested" | "confirmed" | "declined" | "withdrawn";
+};

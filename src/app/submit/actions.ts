@@ -43,34 +43,3 @@ export async function submitMusic(_prev: ActionState, formData: FormData): Promi
   if (error) return { error: "Your submission didn’t go through. Try again in a moment." };
   return { ok: true };
 }
-
-const industrySchema = z.object({
-  name: z.string().trim().min(1, "Enter your name.").max(120),
-  email: z.string().trim().toLowerCase().email("Enter a valid email address."),
-  organization: optional(200),
-  role: z.enum(
-    ["music_supervisor", "sound_designer", "venue", "promoter", "booking_agent", "radio", "podcast", "press", "other"],
-    { message: "Choose what best describes your work." },
-  ),
-  looking_for: optional(2000),
-  notify: z.boolean(),
-});
-
-export async function requestIndustryAccess(_prev: ActionState, formData: FormData): Promise<ActionState> {
-  if (formData.get("website")) return { ok: true };
-
-  const parsed = industrySchema.safeParse({
-    name: formData.get("name") ?? "",
-    email: formData.get("email") ?? "",
-    organization: formData.get("organization") ?? "",
-    role: formData.get("role") ?? "",
-    looking_for: formData.get("looking_for") ?? "",
-    notify: formData.get("notify") === "on",
-  });
-  if (!parsed.success) return { error: firstError(parsed.error) };
-
-  const supabase = await createClient();
-  const { error } = await supabase.from("industry_contacts").insert(parsed.data);
-  if (error) return { error: "Your request didn’t go through. Try again in a moment." };
-  return { ok: true };
-}

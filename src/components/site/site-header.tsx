@@ -55,7 +55,7 @@ export function SiteFooter() {
             Browse the roster
           </Link>
           <Link href="/industry" className="hover:text-yellow">
-            Request industry access
+            Create an industry account
           </Link>
         </nav>
       </div>

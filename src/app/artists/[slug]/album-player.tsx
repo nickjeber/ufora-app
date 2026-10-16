@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { formatDuration } from "@/lib/format";
 
@@ -8,7 +9,8 @@ type PlayerTrack = { id: string; title: string; number: number; duration: number
 /** Pause any other album player on the page when this one starts. */
 const PLAY_EVENT = "ufora:play";
 
-export function AlbumPlayer({ tracks }: { tracks: PlayerTrack[] }) {
+/** `licenseBase`, when set, adds a "License" link per track pointing at `${licenseBase}/${track.id}`. */
+export function AlbumPlayer({ tracks, licenseBase }: { tracks: PlayerTrack[]; licenseBase?: string }) {
   const audio = useRef<HTMLAudioElement>(null);
   const [current, setCurrent] = useState<number | null>(null);
   const [playing, setPlaying] = useState(false);
@@ -60,11 +62,11 @@ export function AlbumPlayer({ tracks }: { tracks: PlayerTrack[] }) {
         {tracks.map((t, i) => {
           const isCurrent = i === current;
           return (
-            <li key={t.id}>
+            <li key={t.id} className={`flex items-center ${isCurrent ? "bg-yellow/40" : ""}`}>
               <button
                 type="button"
                 onClick={() => play(i)}
-                className={`flex w-full items-center gap-4 px-4 py-3 text-left transition hover:bg-yellow/30 ${isCurrent ? "bg-yellow/40" : ""}`}
+                className="flex min-w-0 flex-1 items-center gap-4 px-4 py-3 text-left transition hover:bg-yellow/30"
                 aria-label={`${isCurrent && playing ? "Pause" : "Play"} ${t.title}`}
               >
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-plum text-[10px] text-yellow">
@@ -74,6 +76,15 @@ export function AlbumPlayer({ tracks }: { tracks: PlayerTrack[] }) {
                 <span className="min-w-0 flex-1 truncate font-medium">{t.title}</span>
                 <span className="text-sm text-muted tabular-nums">{formatDuration(t.duration)}</span>
               </button>
+              {licenseBase && (
+                <Link
+                  href={`${licenseBase}/${t.id}`}
+                  className="mr-3 shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium ring-2 ring-plum transition-colors hover:bg-plum hover:text-yellow"
+                  aria-label={`License ${t.title}`}
+                >
+                  License
+                </Link>
+              )}
             </li>
           );
         })}

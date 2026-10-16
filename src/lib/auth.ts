@@ -2,7 +2,7 @@ import "server-only";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "./supabase/server";
-import type { Profile } from "./types";
+import type { IndustryProfile, Profile } from "./types";
 
 /** For pages: returns the signed-in user + their profile, or redirects to login. */
 export async function requireArtist() {
@@ -12,8 +12,30 @@ export async function requireArtist() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single<Profile>();
-  if (!profile) redirect("/login?error=profile");
+  const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).maybeSingle<Profile>();
+  if (!profile) {
+    // Industry members have no artist profile; send them to their own dashboard.
+    const { data: industry } = await supabase.from("industry_profiles").select("id").eq("id", user.id).maybeSingle();
+    redirect(industry ? "/industry/dashboard" : "/login?error=profile");
+  }
+
+  return { supabase, user, profile };
+}
+
+/** For industry pages: returns the signed-in user + their industry profile, or redirects. */
+export async function requireIndustry() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login?next=/industry/dashboard");
+
+  const { data: profile } = await supabase
+    .from("industry_profiles")
+    .select("*")
+    .eq("id", user.id)
+    .maybeSingle<IndustryProfile>();
+  if (!profile) redirect("/dashboard");
 
   return { supabase, user, profile };
 }

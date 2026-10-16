@@ -33,7 +33,7 @@ export default async function RosterPage() {
             </p>
           </div>
           <Link href="/industry" className="site-btn-outline">
-            Request industry access
+            Create an industry account
           </Link>
         </div>
 
@@ -41,11 +41,11 @@ export default async function RosterPage() {
           <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl bg-yellow p-8 sm:p-12">
             <p className="font-display text-4xl leading-none font-semibold">First signings coming soon.</p>
             <p className="max-w-[34rem] text-lg leading-relaxed">
-              Request industry access and we’ll email you when the first artists are on the roster.
+              Create a free industry account and new signings will show up in your feed the day they join.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/industry" className="site-btn px-6 py-3 text-base">
-                Request industry access
+                Create an industry account
               </Link>
               <Link href="/submit" className="site-btn-outline">
                 Submit your music

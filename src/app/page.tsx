@@ -190,7 +190,7 @@ export default function Home() {
                 href="/industry"
                 className="inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-medium text-white ring-2 ring-white/70 transition-colors hover:bg-white hover:text-plum focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-yellow"
               >
-                Request industry access
+                Create an industry account
               </Link>
             </div>
           </div>
@@ -204,8 +204,8 @@ export default function Home() {
               ))}
             </ul>
             <p className="mt-8 leading-relaxed text-white/75">
-              Industry accounts are on the way. Request access and you’ll be first in, with alerts when we sign someone
-              new or an artist you follow releases something, plus a quick way to inquire and book.
+              A free industry account gives you a feed of new releases from the roster, with a quick way to license any
+              track or pick dates and book the artist.
             </p>
           </div>
         </div>

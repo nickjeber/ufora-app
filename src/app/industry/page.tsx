@@ -2,24 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter, SiteHeader } from "@/components/site/site-header";
 import { Field, SiteForm, siteInput } from "@/components/site/site-form";
-import { requestIndustryAccess } from "../submit/actions";
+import { INDUSTRY_ROLE_LABEL } from "@/lib/format";
+import { signupIndustry } from "./actions";
 
 export const metadata: Metadata = {
   title: "For industry",
-  description: "License and book original, uncompromised artists directly. Request Ufora industry access.",
+  description: "License and book original, uncompromised artists directly. Create a free Ufora industry account.",
 };
-
-const ROLES = [
-  ["music_supervisor", "Music supervisor"],
-  ["sound_designer", "Sound designer"],
-  ["venue", "Venue"],
-  ["promoter", "Promoter"],
-  ["booking_agent", "Booking agent"],
-  ["radio", "Radio host or programmer"],
-  ["podcast", "Podcast host"],
-  ["press", "Press"],
-  ["other", "Something else"],
-] as const;
 
 export default function IndustryPage() {
   return (
@@ -31,41 +20,40 @@ export default function IndustryPage() {
             License and book, without the middlemen
           </h1>
           <p className="mt-6 max-w-[30rem] text-lg leading-relaxed">
-            Every Ufora artist owns their work outright, so you clear and book directly with clear terms and no
+            Every Ufora artist owns their work outright, so you clear and book directly, with clear terms and no
             bureaucracy.
           </p>
-          <p className="mt-4 max-w-[30rem] text-lg leading-relaxed">
-            Industry accounts are on the way. Request access and you’ll be among the first in, with alerts when we sign
-            someone new or an artist you follow releases something, plus a quick way to inquire and book.
+          <ul className="mt-8 max-w-[30rem] space-y-4 border-t-2 border-plum pt-8 text-lg leading-snug">
+            <li className="flex gap-4">
+              <span aria-hidden className="mt-2 size-3 shrink-0 rounded-full bg-yellow ring-1 ring-plum/30" />
+              New releases from the roster, ready to play, in one feed
+            </li>
+            <li className="flex gap-4">
+              <span aria-hidden className="mt-2 size-3 shrink-0 rounded-full bg-yellow ring-1 ring-plum/30" />
+              License any track in a couple of minutes
+            </li>
+            <li className="flex gap-4">
+              <span aria-hidden className="mt-2 size-3 shrink-0 rounded-full bg-yellow ring-1 ring-plum/30" />
+              Pick dates and book an artist for a tour, show, session or appearance
+            </li>
+          </ul>
+          <p className="mt-8 text-[15px] text-muted">
+            Already have an account?{" "}
+            <Link href="/login?next=/industry/dashboard" className="font-medium text-plum underline underline-offset-4">
+              Sign in
+            </Link>
           </p>
-          <Link href="/artists" className="site-btn-outline mt-8">
-            Browse the roster now
-          </Link>
         </div>
 
         <div className="lg:pt-4">
-          <SiteForm
-            action={requestIndustryAccess}
-            submitLabel="Request access"
-            pendingLabel="Sending…"
-            success={
-              <>
-                <p className="font-display text-4xl leading-none font-semibold">You’re on the list.</p>
-                <p className="mt-4 text-lg leading-relaxed">
-                  We’ll email you when industry accounts open. In the meantime, the roster is open to browse.
-                </p>
-                <Link href="/artists" className="site-btn mt-6">
-                  Browse the roster
-                </Link>
-              </>
-            }
-          >
+          <h2 className="mb-6 font-display text-3xl font-semibold">Create a free industry account</h2>
+          <SiteForm action={signupIndustry} submitLabel="Create account" pendingLabel="Creating…" success={null}>
             <div className="grid gap-6 sm:grid-cols-2">
               <Field label="Your name" htmlFor="name">
                 <input id="name" name="name" required maxLength={120} autoComplete="name" className={siteInput} />
               </Field>
-              <Field label="Work email" htmlFor="email">
-                <input id="email" name="email" type="email" required autoComplete="email" className={siteInput} />
+              <Field label="Title" htmlFor="title">
+                <input id="title" name="title" maxLength={160} placeholder="Music supervisor" className={siteInput} />
               </Field>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
@@ -77,7 +65,7 @@ export default function IndustryPage() {
                   <option value="" disabled>
                     Choose one
                   </option>
-                  {ROLES.map(([value, label]) => (
+                  {Object.entries(INDUSTRY_ROLE_LABEL).map(([value, label]) => (
                     <option key={value} value={value}>
                       {label}
                     </option>
@@ -85,17 +73,22 @@ export default function IndustryPage() {
                 </select>
               </Field>
             </div>
-            <Field
-              label="What are you looking for? (optional)"
-              htmlFor="looking_for"
-              hint="A sound for a project, an opener for a tour, guests for a show…"
-            >
-              <textarea id="looking_for" name="looking_for" rows={4} maxLength={2000} className={siteInput} />
-            </Field>
-            <label className="flex items-start gap-3">
-              <input type="checkbox" name="notify" defaultChecked className="mt-1 size-5 accent-plum" />
-              <span>Email me when Ufora signs a new artist</span>
-            </label>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <Field label="Work email" htmlFor="email">
+                <input id="email" name="email" type="email" required autoComplete="email" className={siteInput} />
+              </Field>
+              <Field label="Password" htmlFor="password" hint="At least 8 characters.">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  minLength={8}
+                  autoComplete="new-password"
+                  className={siteInput}
+                />
+              </Field>
+            </div>
           </SiteForm>
         </div>
       </main>
