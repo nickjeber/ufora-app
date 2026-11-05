@@ -77,10 +77,9 @@ export default function Home() {
             A record label that replaced the executives with machines, not the artists.
           </h1>
           <p className="mt-8 max-w-[36rem] text-lg leading-relaxed sm:text-xl">
-            The average working musician earns about $21,000 a year from music. A major-label executive makes ten times
-            that, and a major-label CEO can earn more in one year than that musician would in thousands. So we replaced
-            them. Artists keep their masters, their name and their sound; AI handles the contracts, bookings, licensing
-            and payments.
+            The average record label executive earns four to five times more than the average working musician. At a
+            major label, it can be ten times more. We started Ufora to put that money back where it belongs: with the
+            artists.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link href="/submit" className="site-btn px-6 py-3 text-base">
